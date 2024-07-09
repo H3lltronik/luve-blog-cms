@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "blog_entry_highlighteds",
+  "info": {
+    "singularName": "blog-entry-highlighted",
+    "pluralName": "blog-entry-highlighteds",
+    "displayName": "BlogEntryHighlighted"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tag": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tag.tag"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "datetime",
+      "required": true
+    }
+  }
+}
