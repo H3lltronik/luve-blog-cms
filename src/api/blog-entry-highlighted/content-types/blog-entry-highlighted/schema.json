@@ -4,7 +4,8 @@
   "info": {
     "singularName": "blog-entry-highlighted",
     "pluralName": "blog-entry-highlighteds",
-    "displayName": "BlogEntryHighlighted"
+    "displayName": "BlogEntryHighlighted",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -27,6 +28,34 @@
     "date": {
       "type": "datetime",
       "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "blog_entry": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::blog-entry.blog-entry"
+    },
+    "date_color": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "title_color": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "description_color": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
     }
   }
 }

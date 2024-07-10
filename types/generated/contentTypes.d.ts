@@ -590,6 +590,45 @@ export interface PluginContentReleasesReleaseAction
   };
 }
 
+export interface PluginSlugifySlug extends Schema.CollectionType {
+  collectionName: 'slugs';
+  info: {
+    singularName: 'slug';
+    pluralName: 'slugs';
+    displayName: 'slug';
+  };
+  options: {
+    draftAndPublish: false;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    slug: Attribute.Text;
+    count: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::slugify.slug',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::slugify.slug',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginI18NLocale extends Schema.CollectionType {
   collectionName: 'i18n_locale';
   info: {
@@ -837,7 +876,6 @@ export interface ApiBlogEntryBlogEntry extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    content: Attribute.Blocks & Attribute.Required;
     cover_picture: Attribute.Media<'images'> & Attribute.Required;
     author: Attribute.Relation<
       'api::blog-entry.blog-entry',
@@ -858,6 +896,21 @@ export interface ApiBlogEntryBlogEntry extends Schema.CollectionType {
       'oneToMany',
       'api::blog-entry.blog-entry'
     >;
+    slug: Attribute.String & Attribute.Unique;
+    metaTitle: Attribute.String;
+    metaDescription: Attribute.Text;
+    keywords: Attribute.String;
+    canonicalURL: Attribute.String;
+    ogImage: Attribute.Media;
+    twitterCard: Attribute.String;
+    preview_hover_pictures: Attribute.Media<'images', true>;
+    content_t: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'toolbar';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -883,6 +936,7 @@ export interface ApiBlogEntryHighlightedBlogEntryHighlighted
     singularName: 'blog-entry-highlighted';
     pluralName: 'blog-entry-highlighteds';
     displayName: 'BlogEntryHighlighted';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -896,6 +950,18 @@ export interface ApiBlogEntryHighlightedBlogEntryHighlighted
     title: Attribute.String & Attribute.Required;
     description: Attribute.String & Attribute.Required;
     date: Attribute.DateTime & Attribute.Required;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    blog_entry: Attribute.Relation<
+      'api::blog-entry-highlighted.blog-entry-highlighted',
+      'oneToOne',
+      'api::blog-entry.blog-entry'
+    >;
+    date_color: Attribute.String &
+      Attribute.CustomField<'plugin::color-picker.color'>;
+    title_color: Attribute.String &
+      Attribute.CustomField<'plugin::color-picker.color'>;
+    description_color: Attribute.String &
+      Attribute.CustomField<'plugin::color-picker.color'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -926,6 +992,7 @@ export interface ApiTagTag extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required & Attribute.Unique;
+    slug: Attribute.String & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -950,6 +1017,7 @@ declare module '@strapi/types' {
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::slugify.slug': PluginSlugifySlug;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;

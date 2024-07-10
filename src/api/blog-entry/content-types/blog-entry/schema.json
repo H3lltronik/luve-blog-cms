@@ -16,10 +16,6 @@
       "type": "string",
       "required": true
     },
-    "content": {
-      "type": "blocks",
-      "required": true
-    },
     "cover_picture": {
       "type": "media",
       "multiple": false,
@@ -62,6 +58,45 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::blog-entry.blog-entry"
+    },
+    "slug": {
+      "type": "string",
+      "unique": true
+    },
+    "metaTitle": {
+      "type": "string"
+    },
+    "metaDescription": {
+      "type": "text"
+    },
+    "keywords": {
+      "type": "string"
+    },
+    "canonicalURL": {
+      "type": "string"
+    },
+    "ogImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false
+    },
+    "twitterCard": {
+      "type": "string"
+    },
+    "preview_hover_pictures": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "content_t": {
+      "type": "customField",
+      "options": {
+        "preset": "toolbar"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
     }
   }
 }
