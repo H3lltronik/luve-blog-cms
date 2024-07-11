@@ -63,26 +63,6 @@
       "type": "string",
       "unique": true
     },
-    "metaTitle": {
-      "type": "string"
-    },
-    "metaDescription": {
-      "type": "text"
-    },
-    "keywords": {
-      "type": "string"
-    },
-    "canonicalURL": {
-      "type": "string"
-    },
-    "ogImage": {
-      "type": "media",
-      "multiple": false,
-      "required": false
-    },
-    "twitterCard": {
-      "type": "string"
-    },
     "preview_hover_pictures": {
       "type": "media",
       "multiple": true,
@@ -97,6 +77,12 @@
         "preset": "toolbar"
       },
       "customField": "plugin::ckeditor5.CKEditor"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo",
+      "required": false
     }
   }
 }

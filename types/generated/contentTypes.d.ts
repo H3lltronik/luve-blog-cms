@@ -897,12 +897,6 @@ export interface ApiBlogEntryBlogEntry extends Schema.CollectionType {
       'api::blog-entry.blog-entry'
     >;
     slug: Attribute.String & Attribute.Unique;
-    metaTitle: Attribute.String;
-    metaDescription: Attribute.Text;
-    keywords: Attribute.String;
-    canonicalURL: Attribute.String;
-    ogImage: Attribute.Media;
-    twitterCard: Attribute.String;
     preview_hover_pictures: Attribute.Media<'images', true>;
     content_t: Attribute.RichText &
       Attribute.CustomField<
@@ -911,6 +905,7 @@ export interface ApiBlogEntryBlogEntry extends Schema.CollectionType {
           preset: 'toolbar';
         }
       >;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -962,6 +957,7 @@ export interface ApiBlogEntryHighlightedBlogEntryHighlighted
       Attribute.CustomField<'plugin::color-picker.color'>;
     description_color: Attribute.String &
       Attribute.CustomField<'plugin::color-picker.color'>;
+    enabled: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
