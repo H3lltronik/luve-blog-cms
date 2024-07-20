@@ -40,6 +40,18 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  scheduler: {
+    enabled: true,
+    config: {
+      contentTypes: {
+        "api::blog-entry.blog-entry": {
+          initialPublishAtDate: new Date(
+            new Date().setDate(new Date().getDate() + 1)
+          ).setHours(new Date().getHours() + 1),
+        },
+      },
+    },
+  },
   graphql: {
     config: {
       endpoint: "/graphql",
